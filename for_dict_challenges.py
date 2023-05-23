@@ -4,7 +4,7 @@
 # Вася: 1
 # Маша: 2
 # Петя: 2
-
+from collections import Counter
 students = [
     {'first_name': 'Вася'},
     {'first_name': 'Петя'},
@@ -12,7 +12,11 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+print(1)
+names = [item['first_name'] for item in students]
+cnt = Counter(names)
+for name, count in cnt.items():
+    print(f'{name}: {count}')
 
 
 # Задание 2
@@ -26,7 +30,13 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+print(2)
+names = [item['first_name'] for item in students]
+cnt = Counter(names)
+most_popular_name = cnt.most_common(1)[0]
+most_popular_name = most_popular_name[0]
+print(f'most popular name is {most_popular_name}')
+
 
 
 # Задание 3
@@ -51,7 +61,15 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+print(3)
+count = 0
+for i in range(len(school_students)):
+    names = [item['first_name'] for item in school_students[i]]
+    cnt = Counter(names)
+    most_popular_name = cnt.most_common(1)[0]
+    most_popular_name = most_popular_name[0]
+    count += 1
+    print(f'most popular name in class №{count} is {most_popular_name}')
 
 
 # Задание 4
@@ -72,7 +90,17 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+
+for i in school:
+    count_girls = 0
+    count_boys = 0
+    names = [item['first_name'] for item in i['students']]
+    for j in names:
+        if is_male[j] == True:
+            count_boys += 1
+        else: count_girls += 1
+    number = i['class']
+    print(f'class {number}: girls {count_girls}, boy {count_boys}')
 
 
 # Задание 5
@@ -91,5 +119,27 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+max_boys = 0
+max_girls = 0
+name_max_boys = None
+name_max_girls = None
+for i in school:
+    number = i['class']
+    count_girls = 0
+    count_boys = 0
+    names = [item['first_name'] for item in i['students']]
+    for j in names:
+        if is_male[j] == True:
+            count_boys += 1
+        else: count_girls += 1
+    if count_boys > max_boys:
+        max_boys = count_boys
+        name_max_boys = number
+    if count_girls > max_girls:
+        max_girls = count_girls
+        name_max_girls = number
+
+print(f'most girl in class {name_max_girls} - {max_girls}')
+print(f'most boys in class {name_max_boys} - {max_boys}')
+
 
